@@ -9,6 +9,26 @@ help:
             printf "%-15s %s\n" $$help_command $$help_info ; \
         done
 
-git-pull:
-	@echo -------+ Pulling Git Code +--------
-	@git pull &>/dev/null
+dev-apply: ## Create Dev Environment
+	@echo -------+ Terraform Init +--------
+	@terraform init -backend-config=env/dev-backend.tfvars
+	@terraform plan -backend-config=env/dev-backend.tfvars
+	@terraform apply -auto-approve -var-file=env/dev.tfvars
+
+prod-apply: ## Create Prod Environment
+	@echo -------+ Terraform Init +--------
+	@terraform init -backend-config=env/prod-backend.tfvars
+	@terraform plan -backend-config=env/prod-backend.tfvars
+	@terraform apply -auto-approve -var-file=env/prod.tfvars
+
+dev-destroy: ## Destroy Dev Environment
+	@echo -------+ Terraform Init +--------
+	@terraform init -backend-config=env/dev-backend.tfvars
+	@terraform plan -backend-config=env/dev-backend.tfvars
+	@terraform apply -auto-approve -var-file=env/dev.tfvars
+
+prod-destroy: ## Destroy Prod Environment
+	@echo -------+ Terraform Init +--------
+	@terraform init -backend-config=env/prod-backend.tfvars
+	@terraform plan -backend-config=env/prod-backend.tfvars
+	@terraform apply -auto-approve -var-file=env/prod.tfvars
