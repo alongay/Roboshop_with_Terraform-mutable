@@ -12,13 +12,13 @@ help:
 dev-apply: ## Create Dev Environment
 	@echo -------+ Terraform Init +--------
 	@terraform init -backend-config=env/dev-backend.tfvars
-	@terraform plan ## -backend-config=env/dev-backend.tfvars
+	@terraform plan -backend-config=env/dev.tfvars
 	@terraform apply -auto-approve -var-file=env/dev.tfvars
 
 prod-apply: ## Create Prod Environment
 	@echo -------+ Terraform Init +--------
 	@terraform init -backend-config=env/prod-backend.tfvars
-	@terraform plan ## -backend-config=env/prod-backend.tfvars
+	@terraform plan -backend-config=env/prod.tfvars
 	@terraform apply -auto-approve -var-file=env/prod.tfvars
 
 dev-destroy: ## Destroy Dev Environment
