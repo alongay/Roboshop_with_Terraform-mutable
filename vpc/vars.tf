@@ -1,5 +1,2 @@
-output "ENV" {
-  value = var.ENV
-}
-
 variable "ENV" {}
+variable "VPC_CIDR" {}
